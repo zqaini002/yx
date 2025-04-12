@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    touch-action: none;
+    overflow: hidden;
+    position: relative;
+    background: #f0f0f0;
+}
+
+/* 手机边框样式 */
+.container::before {
+    pointer-events: none;
+}
+
+#game-area {
+    pointer-events: auto;
+}
+
+/* 刘海摄像头 */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 20px;
+    background: #333;
+    border-radius: 0 0 15px 15px;
+    z-index: 1000;
+}
+
+/* 侧边按钮 */
+@media (min-width: 769px) {
+    .container {
+        position: relative;
+        max-width: 400px;
+        margin: 20px auto;
+        height: calc(100vh - 40px);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    }
+}
+
+@media (max-width: 768px) {
+    .container::before {
+        top: 10px;
+        height: calc(100% - 20px);
+        border-radius: 25px;
+    }
+    .container::after {
+        width: 100px;
+        height: 15px;
+    }
+}
+
+/* 基础样式 */
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 游戏区域 */
+#game-area {
+    flex: 1;
+    position: relative;
+    touch-action: none;
+}
+
+/* 道具按钮容器 */
+.powerup-bar {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+}
+
+/* 道具按钮样式 */
+.powerup-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.95) url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='%23333' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21 11c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9zm-3.46-5.5c-.2-.78-.76-1.47-1.54-1.65-.78-.17-1.57.12-2.1.65L12 5.1 9.1 2.19c-.53-.53-1.33-.82-2.1-.65-.78.18-1.34.87-1.54 1.65L3 9h18l-1.46-3.5z'/%3E%3C/svg%3E") no-repeat center/60%;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.powerup-btn:active {
+    transform: scale(0.9);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    #game-area {
+        margin: 1rem;
+    }
+    
+    @media (max-width: 480px) {
+        .dust {
+            width: 1rem;
+            height: 1rem;
+        }
+        
+        .powerup-bar {
+            bottom: 0.5rem;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .powerup-btn {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+}
+
+@media (min-width: 769px) {
+    #game-area {
+        margin: 2rem;
+    }
+}
+
+:root {
+    font-size: 16px;
+}
+
+.dust {
+    position: absolute;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: radial-gradient(circle, #666 30%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+#score {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #333;
+    z-index: 100;
+    background: rgba(255,255,255,0.8);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+@media (max-width: 600px) {
+    .dust {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+
+.game-over-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+.game-over-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255,215,0,0.5);
+}
+
+.restart-btn {
+    background: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.restart-btn:hover {
+    background: #45a049;
+    transform: scale(1.1);
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+}

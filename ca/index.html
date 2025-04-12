@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>屏幕清洁工</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div id="score">得分：0</div>
+        <div id="level" class="level-indicator">第1关</div>
+        <div id="game-area"></div>
+        <div class="powerup-bar">
+            <button id="magnet-btn" class="powerup-btn">
+                <i class="fas fa-magnet"></i>
+            </button>
+            <button id="freeze-btn" class="powerup-btn">
+                <i class="fas fa-snowflake"></i>
+            </button>
+        </div>
+        <div id="game-over-layer" class="game-over-layer">
+            <div class="game-over-box">
+                <h2>游戏通关！</h2>
+                <p>最终得分：<span id="final-score">0</span></p>
+                <button id="restart-btn" class="restart-btn">重新开始</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
